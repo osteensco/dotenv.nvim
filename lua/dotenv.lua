@@ -8,6 +8,8 @@ dotenv.config = {
   event = "VimEnter",
   enable_on_load = false,
   verbose = false,
+  file_name = ".env",
+  wk_dir = ".",
 }
 
 local function notify(msg, level)
@@ -59,7 +61,7 @@ local function parse_data(data)
 end
 
 local function get_env_file()
-  local files = vim.fs.find(".env", { upward = true, type = "file" })
+  local files = vim.fs.find(dotenv.config.file_name, { path = dotenv.config.wk_dir, upward = true, type = "file" })
   if #files == 0 then
     return
   end
